@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_post"
+        tools:context=".PostActivity">
+
+    <WebView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="1dp"
+            android:id="@+id/webView" app:layout_constraintTop_toBottomOf="@+id/goOriginal"/>
+    <Button
+            android:text="Ir al chollo"
+            android:layout_width="153dp"
+            android:layout_height="63dp"
+            android:id="@+id/goOriginal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/webView"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/share"
+            android:layout_marginEnd="5dp" android:layout_marginRight="5dp"/>
+    <Button
+            android:text="Compartir"
+            android:layout_width="153dp"
+            android:layout_height="63dp"
+            android:id="@+id/share"
+            app:layout_constraintBottom_toTopOf="@+id/webView" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="5dp" android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/goOriginal"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

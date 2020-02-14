@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Rastreador de chollos</string>
+    <string name="action_quit">Salir</string>
+    <string name="title_activity_post">Detalles del chollo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="load_more">Cargando más chollos</string>
+</resources>
