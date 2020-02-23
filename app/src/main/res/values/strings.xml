@@ -5,5 +5,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="load_more">Cargando más chollos</string>
+    <string name="goPost">Ir al chollo</string>
+    <string name="share">Compartir</string>
+    <string name="details">Detalles</string>
+    <string name="load_more">Cargar más</string>
 </resources>

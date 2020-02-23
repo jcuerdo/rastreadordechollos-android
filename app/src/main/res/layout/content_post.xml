@@ -12,24 +12,37 @@
     <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="1dp"
-            android:id="@+id/webView" app:layout_constraintTop_toBottomOf="@+id/goOriginal"/>
+            android:id="@+id/webView" app:layout_constraintTop_toBottomOf="@+id/goOriginalButton"
+            android:layout_marginTop="48dp"
+            tools:layout_editor_absoluteX="189dp"/>
     <Button
-            android:text="Ir al chollo"
-            android:layout_width="153dp"
-            android:layout_height="63dp"
-            android:id="@+id/goOriginal"
+            android:text="@string/goPost"
+            android:layout_width="156dp"
+            android:layout_height="42dp"
+            android:id="@+id/goOriginalButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/webView"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/share"
-            android:layout_marginEnd="5dp" android:layout_marginRight="5dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/shareButton"
+            android:layout_marginEnd="53dp" android:layout_marginRight="53dp"
+            app:layout_constraintHorizontal_bias="0.888" android:background="@color/colorButton"
+            android:textColor="@color/colorButtonText" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="5dp"/>
     <Button
-            android:text="Compartir"
-            android:layout_width="153dp"
-            android:layout_height="63dp"
-            android:id="@+id/share"
+            android:text="@string/share"
+            android:layout_width="156dp"
+            android:layout_height="42dp"
+            android:id="@+id/shareButton"
             app:layout_constraintBottom_toTopOf="@+id/webView" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginLeft="5dp" android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@+id/goOriginal"/>
+            app:layout_constraintVertical_bias="0.0" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="28dp" android:layout_marginRight="28dp" android:background="@color/colorButton"
+            android:textColor="@color/colorButtonText" android:layout_marginTop="5dp"/>
+    <TextView
+            android:layout_width="356dp"
+            android:layout_height="37dp"
+            android:id="@+id/postTitle" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="71dp" app:layout_constraintBottom_toTopOf="@+id/webView"
+            app:layout_constraintVertical_bias="0.0" android:textStyle="normal|bold" android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

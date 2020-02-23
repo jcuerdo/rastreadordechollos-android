@@ -24,11 +24,11 @@ import kotlin.system.exitProcess
 
 
 class MainActivity() : AppCompatActivity() {
-
     var loadingFooter: View? = null
-    var posts = PostList(emptyList())
     var page : Int  = 0;
-    var apiUrl : String = "https://www.rastreadordechollos.com/api/?page=%d";
+    var baseUrl : String = "https://www.rastreadordechollos.com/";
+    var apiUrl : String = baseUrl + "api/?page=%d";
+    var posts = PostList(baseUrl, emptyList())
     var adapter = PostListAdapter(this.posts)
     var fetching = false
     lateinit var mInterstitialAd: InterstitialAd
@@ -108,7 +108,6 @@ class MainActivity() : AppCompatActivity() {
                     this@MainActivity.postList.removeFooterView(this@MainActivity.loadingFooter)
                 }
 
-
             }
 
         })
@@ -144,11 +143,17 @@ class Post (
 }
 
 class PostList (
+    var baseUrl : String,
     var posts : List<Post>
 ){
     fun append(morePosts :  PostList) {
         this.posts = this.posts + morePosts.posts
     }
+}
+
+class PostSingle (
+    var post : Post
+){
 }
 
 class PostListScrollView(var fetchPosts : () -> Unit) : AbsListView.OnScrollListener{
@@ -169,7 +174,7 @@ class PostListScrollView(var fetchPosts : () -> Unit) : AbsListView.OnScrollList
     }
 }
 
-class PostListAdapter(private val dataSource: PostList) : BaseAdapter() {
+class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
 
     override fun getView(postition: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -177,14 +182,32 @@ class PostListAdapter(private val dataSource: PostList) : BaseAdapter() {
         val postView = inflater.inflate(R.layout.post_element, parent, false)
         val post = getItem(postition) as Post;
 
-        postView.title.text = post.title
+        postView.postTitle.text = post.title
 
-        postView.showButton.setOnClickListener { view ->
-            val intent = Intent(view.context, PostActivity::class.java)
+        fun showDetails(post : Post, view : View){
+                val intent = Intent(view.context, PostActivity::class.java)
+                intent.putExtra("title", post.title)
+                intent.putExtra("link", post.link)
+                intent.putExtra("baseUrl", dataSource.baseUrl)
+                intent.putExtra("content", post.content)
+                intent.putExtra("slag", post.slag)
+                startActivity(view.context, intent, null)
+        }
 
-            intent.putExtra("content", post.content)
+        postView.photo.setOnClickListener { view -> showDetails(post,view) }
+        postView.postTitle.setOnClickListener { view -> showDetails(post,view) }
+        postView.showButton.setOnClickListener { view -> showDetails(post,view) }
 
-            startActivity(view.context, intent, null)
+        postView.shareButton.setOnClickListener { view ->
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            sendIntent.type= "text/plain"
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, post.title)
+            sendIntent.putExtra(Intent.EXTRA_TEXT,  dataSource.baseUrl + post.slag)
+
+            var shareIntent = Intent.createChooser(sendIntent, null)
+
+            startActivity(view.context, shareIntent,null)
         }
 
 

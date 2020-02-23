@@ -11,38 +11,40 @@
     <androidx.constraintlayout.widget.Guideline
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:layout_constraintGuide_begin="257dp" android:id="@+id/guideline2"/>
+            android:layout_height="wrap_content" app:layout_constraintGuide_begin="219dp" android:id="@+id/guideline2"/>
     <ImageView
-            android:layout_width="134dp"
-            android:layout_height="178dp" app:srcCompat="@color/colorPrimary"
+            android:layout_width="161dp"
+            android:layout_height="179dp" app:srcCompat="@color/colorPrimary"
             android:id="@+id/photo"
-            tools:layout_editor_absoluteY="18dp"
-            app:layout_constraintStart_toEndOf="@+id/title" android:layout_marginLeft="24dp"
+            tools:layout_editor_absoluteY="17dp"
+            app:layout_constraintStart_toEndOf="@+id/postTitle" android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"/>
     <TextView
             android:text="Ejemplillo"
-            android:layout_width="213dp"
-            android:layout_height="122dp"
-            android:id="@+id/title" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toStartOf="@+id/photo" android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"/>
+            android:layout_width="196dp"
+            android:layout_height="129dp"
+            android:id="@+id/postTitle" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            tools:layout_editor_absoluteY="20dp"/>
     <Button
-            android:text="Detalles"
+            android:text="@string/details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/showButton" android:layout_marginTop="1dp"
-            app:layout_constraintTop_toBottomOf="@+id/title" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/showButton"
+            app:layout_constraintTop_toBottomOf="@+id/postTitle" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
             app:layout_constraintEnd_toStartOf="@+id/photo"
-            android:layout_marginEnd="149dp" android:layout_marginRight="149dp"/>
+            android:layout_marginEnd="149dp" android:layout_marginRight="149dp"
+            android:background="@color/colorButton"
+            style="@style/Widget.AppCompat.Button" android:textColor="@color/colorButtonText"
+            app:layout_constraintHorizontal_bias="0.0"/>
     <Button
-            android:text="Compartir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button" android:layout_marginTop="1dp"
-            app:layout_constraintTop_toBottomOf="@+id/title" app:layout_constraintStart_toEndOf="@+id/showButton"
+            android:text="@string/share"
+            android:layout_width="94dp"
+            android:layout_height="47dp"
+            android:id="@+id/shareButton"
+            app:layout_constraintTop_toBottomOf="@+id/postTitle" app:layout_constraintStart_toEndOf="@+id/showButton"
             app:layout_constraintEnd_toStartOf="@+id/photo" android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"/>
+            android:layout_marginRight="32dp" app:layout_constraintHorizontal_bias="1.0"
+            android:textColor="@color/colorButtonText" android:background="@color/colorButton"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
