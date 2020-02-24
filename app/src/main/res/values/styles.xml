@@ -12,10 +12,9 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="AppTheme.Splash">
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@drawable/icon1024</item>
-
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
