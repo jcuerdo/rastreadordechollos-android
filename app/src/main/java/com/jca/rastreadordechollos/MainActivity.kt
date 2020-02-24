@@ -196,6 +196,8 @@ class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
 
         postView.photo.setOnClickListener { view -> showDetails(post,view) }
         postView.postTitle.setOnClickListener { view -> showDetails(post,view) }
+
+        /**
         postView.showButton.setOnClickListener { view -> showDetails(post,view) }
 
         postView.shareButton.setOnClickListener { view ->
@@ -209,7 +211,7 @@ class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
 
             startActivity(view.context, shareIntent,null)
         }
-
+**/
 
         val picasso = Picasso.Builder(parent?.context)
             .listener {
@@ -219,9 +221,7 @@ class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
 
             .build()
 
-        picasso.load(post.image)
-            .resize(200, 200)
-            .into(postView.photo)
+        picasso.load(post.image).placeholder(R.drawable.ic_action_name).into(postView.photo)
 
 
         return postView
