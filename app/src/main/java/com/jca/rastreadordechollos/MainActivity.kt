@@ -27,7 +27,8 @@ class MainActivity() : AppCompatActivity() {
     var loadingFooter: View? = null
     var page : Int  = 0;
     var baseUrl : String = "https://www.rastreadordechollos.com/";
-    var apiUrl : String = baseUrl + "api/?page=%d";
+    var apiUrl : String = baseUrl + "api/";
+    var apiPageUrl : String = apiUrl + "?page=%d";
     var posts = PostList(baseUrl, emptyList())
     var adapter = PostListAdapter(this.posts)
     var fetching = false
@@ -36,9 +37,41 @@ class MainActivity() : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        val slag = intent.getStringExtra("slag")
+        if( slag != null){
+            val url = this.apiUrl + slag
+            val request = Request.Builder().url(url).build()
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
+
+                override fun onResponse(call: Call, response: Response) {
+                    val gson = GsonBuilder().create()
+                    val post = gson.fromJson(response?.body?.string(), PostSingle::class.java)
+                    val intent = Intent(applicationContext, PostActivity::class.java)
+                    intent.putExtra("title", post.post.title)
+                    intent.putExtra("link", post.post.link)
+                    intent.putExtra("baseUrl", baseUrl)
+                    intent.putExtra("content", post.post.content)
+                    intent.putExtra("slag", post.post.slag)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(applicationContext, intent, null)
+
+                }
+
+                override fun onFailure(call: Call, e: IOException) {
+                    println(e.message)
+                }
+
+            })
+        }
+
 
         MobileAds.initialize(this) {}
         mInterstitialAd = InterstitialAd(this)
@@ -78,7 +111,7 @@ class MainActivity() : AppCompatActivity() {
         }
 
         this.fetching = true
-        val url = String.format(this.apiUrl, this.page)
+        val url = String.format(this.apiPageUrl, this.page)
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 
@@ -104,7 +137,7 @@ class MainActivity() : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 println(e.message)
                 runOnUiThread(){
-                    Toast.makeText(this@MainActivity.applicationContext, "ERRORACO", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity.applicationContext, "Error cargando chollos", Toast.LENGTH_LONG).show()
                     this@MainActivity.postList.removeFooterView(this@MainActivity.loadingFooter)
                 }
 
