@@ -9,4 +9,9 @@
     <string name="share">Compartir</string>
     <string name="details">Detalles</string>
     <string name="load_more">Cargar más</string>
+    <string name="adsense_app_id">ca-app-pub-6904186947817626~6314277082</string>
+    <string name="adsense_interstitial">ca-app-pub-6904186947817626/3814932797</string>
+    <string name="baseUrl">https://www.rastreadordechollos.com/</string>
+    <string name="error_loading_posts">Error cargando chollos</string>
+
 </resources>
