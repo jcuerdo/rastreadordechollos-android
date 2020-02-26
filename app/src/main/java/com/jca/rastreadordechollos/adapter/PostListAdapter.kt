@@ -48,7 +48,7 @@ class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
 
             .build()
 
-        picasso.load(post.image).placeholder(R.drawable.ic_action_name).into(postView.photo)
+        picasso.load(post.image).placeholder(R.drawable.splash).into(postView.photo)
 
 
         return postView

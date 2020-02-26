@@ -10,6 +10,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.GsonBuilder
 import com.jca.rastreadordechollos.adapter.PostListAdapter
 import com.jca.rastreadordechollos.model.PostList
@@ -46,10 +47,15 @@ class MainActivity() : AppCompatActivity() {
         initVariables()
         initAds()
 
+        FirebaseMessaging.getInstance().subscribeToTopic("notifications")
+
+
         val slag = intent.getStringExtra("slag")
 
         if( slag != null){
-            loadPostActivityFromSlag(slag)
+            try{
+                loadPostActivityFromSlag(slag)
+            } catch (e : Exception) {}
         }
 
 
@@ -76,24 +82,29 @@ class MainActivity() : AppCompatActivity() {
     }
 
     private fun loadPostActivityFromSlag(slag: String?) {
-        val url = baseUrl + slag
+        val url = apiUrl + slag
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 
         client.newCall(request).enqueue(object : Callback {
 
             override fun onResponse(call: Call, response: Response) {
-                val gson = GsonBuilder().create()
-                val post = gson.fromJson(response.body?.string(), PostSingle::class.java)
-                val intent = Intent(applicationContext, PostActivity::class.java)
-                intent.putExtra("title", post.post.title)
-                intent.putExtra("link", post.post.link)
-                intent.putExtra("baseUrl", baseUrl)
-                intent.putExtra("content", post.post.content)
-                intent.putExtra("slag", post.post.slag)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try{
+                    val gson = GsonBuilder().create()
+                    val post = gson.fromJson(response.body?.string(), PostSingle::class.java)
+                    val intent = Intent(applicationContext, PostActivity::class.java)
+                    intent.putExtra("title", post.post.title)
+                    intent.putExtra("link", post.post.link)
+                    intent.putExtra("baseUrl", baseUrl)
+                    intent.putExtra("content", post.post.content)
+                    intent.putExtra("slag", post.post.slag)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                startActivity(applicationContext, intent, null)
+                    startActivity(applicationContext, intent, null)
+                } catch (e : Exception) {
+
+                }
+
 
             }
 
