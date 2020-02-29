@@ -1,18 +1,22 @@
 package com.jca.rastreadordechollos.adapter
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.jca.rastreadordechollos.PostActivity
 import com.jca.rastreadordechollos.R
 import com.jca.rastreadordechollos.model.Post
 import com.jca.rastreadordechollos.model.PostList
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_post.view.postTitle
 import kotlinx.android.synthetic.main.post_element.view.photo
+
 
 class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
 
@@ -40,15 +44,18 @@ class PostListAdapter(val dataSource: PostList) : BaseAdapter() {
         postView.photo.setOnClickListener { view -> showDetails(post,view) }
         postView.postTitle.setOnClickListener { view -> showDetails(post,view) }
 
-        val picasso = Picasso.Builder(parent?.context)
-            .listener {
-                    _, _, e ->
-                println(e.message)
-            }
+        if(post.image != null) {
+            Glide
+                .with(postView)
+                .load(post.image)
+                .into(postView.photo);
 
-            .build()
-
-        picasso.load(post.image).placeholder(R.drawable.splash).into(postView.photo)
+        } else {
+            Glide
+                .with(postView)
+                .load(R.drawable.splash)
+                .into(postView.photo);
+        }
 
 
         return postView
